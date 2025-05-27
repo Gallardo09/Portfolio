@@ -78,7 +78,7 @@ const Portfolio = () => {
         <div className="container mx-auto px-6 z-10 text-center">
           <div className="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-green-300 shadow-lg">
             {/* Tu foto aquí */}
-            <img src="/tu-foto.jpg" alt="Darbin Gallardo" className="w-full h-full object-cover" />
+            <img src="/pictures/perfil.jpg" alt="Darbin Gallardo" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Darbin José Gallardo Quintero</h1>
           <h2 className="text-2xl md:text-3xl text-green-300 mb-8">Desarrollador Web Full Stack</h2>
@@ -200,22 +200,21 @@ const Portfolio = () => {
             <SkillCard icon="fab fa-css3-alt" name="CSS3" />
             <SkillCard icon="fab fa-js" name="JavaScript" />
             <SkillCard icon="fab fa-bootstrap" name="Bootstrap" />
-            <SkillCard icon="fas fa-wind" name="Tailwind" />
-            <SkillCard icon="fab fa-sass" name="SASS" />
+            <SkillCard icon="devicon-tailwindcss-original" name="Tailwind" />
             
             {/* Backend Skills */}
-            <SkillCard icon="fas fa-server" name=".NET Core" />
-            <SkillCard icon="fab fa-microsoft" name="C#" />
-            <SkillCard icon="fas fa-database" name="SQL Server" />
-            <SkillCard icon="fas fa-database" name="MySQL" />
-            <SkillCard icon="fas fa-database" name="PostgreSQL" />
+            <SkillCard icon="devicon-dotnetcore-plain" name=".NET Core" />
+            <SkillCard icon="devicon-csharp-plain" name="C#" />
+            <SkillCard icon="devicon-microsoftsqlserver-plain-wordmark" name="SQL Server" />
+            <SkillCard icon="devicon-mysql-original" name="MySQL" />
+            <SkillCard icon="devicon-postgresql-plain" name="PostgreSQL" />
             
             {/* Tools */}
             <SkillCard icon="fab fa-git-alt" name="Git" />
             <SkillCard icon="fab fa-github" name="GitHub" />
-            <SkillCard icon="fab fa-microsoft" name="Azure DevOps" />
+            <SkillCard icon="devicon-azuredevops-plain" name="Azure DevOps" />
             <SkillCard icon="fas fa-terminal" name="IIS" />
-            <SkillCard icon="fas fa-code" name="VS Code" />
+            <SkillCard icon="devicon-vscode-plain" name="VS Code" />
           </div>
         </div>
       </section>
@@ -328,48 +327,6 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div className="md:w-1/2 bg-green-800 bg-opacity-50 p-8 rounded-lg border border-green-600">
-              <h3 className="text-2xl font-semibold mb-6">Envíame un mensaje</h3>
-              <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2">Nombre</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    className="w-full px-4 py-2 bg-green-900 border border-green-600 rounded focus:outline-none focus:ring-2 focus:ring-green-300" 
-                    placeholder="Tu nombre"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block mb-2">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    className="w-full px-4 py-2 bg-green-900 border border-green-600 rounded focus:outline-none focus:ring-2 focus:ring-green-300" 
-                    placeholder="tu@email.com"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block mb-2">Mensaje</label>
-                  <textarea 
-                    id="message" 
-                    rows="5" 
-                    className="w-full px-4 py-2 bg-green-900 border border-green-600 rounded focus:outline-none focus:ring-2 focus:ring-green-300" 
-                    placeholder="Tu mensaje..."
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className="px-8 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 w-full"
-                >
-                  Enviar Mensaje
-                </button>
-              </form>
             </div>
           </div>
         </div>

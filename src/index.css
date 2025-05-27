@@ -16,28 +16,61 @@ code {
     monospace;
 }
 
+:root {
+  --neonGreen: #00ff9d4f;
+  --neonBlue: #00a8ff;
+}
+
+.text-neonGreen {
+  color: var(--neonGreen);
+}
+
+.text-neonBlue {
+  color: var(--neonBlue);
+}
+
+.border-neonGreen {
+  border-color: var(--neonGreen);
+}
+
+.border-neonBlue {
+  border-color: var(--neonBlue);
+}
+
+.bg-neonGreen {
+  background-color: var(--neonGreen);
+}
+
+.bg-neonBlue {
+  background-color: var(--neonBlue);
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(0, 255, 157, 0.137);
+}
+
 @keyframes neon-top {
-  0% { width: 0; left: 0; }
-  50% { width: 100%; left: 0; }
-  100% { width: 0; left: 100%; }
+  0% { width: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { width: 100%; opacity: 0; }
 }
 
 @keyframes neon-right {
-  0% { height: 0; top: 0; }
-  50% { height: 100%; top: 0; }
-  100% { height: 0; top: 100%; }
+  0% { height: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { height: 100%; opacity: 0; }
 }
 
 @keyframes neon-bottom {
-  0% { width: 0; right: 0; }
-  50% { width: 100%; right: 0; }
-  100% { width: 0; right: 100%; }
+  0% { width: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { width: 100%; opacity: 0; }
 }
 
 @keyframes neon-left {
-  0% { height: 0; bottom: 0; }
-  50% { height: 100%; bottom: 0; }
-  100% { height: 0; bottom: 100%; }
+  0% { height: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { height: 100%; opacity: 0; }
 }
 
 .animate-neon-top {
@@ -45,13 +78,21 @@ code {
 }
 
 .animate-neon-right {
-  animation: neon-right 2s infinite;
+  animation: neon-right 2s infinite 0.5s;
 }
 
 .animate-neon-bottom {
-  animation: neon-bottom 2s infinite;
+  animation: neon-bottom 2s infinite 1s;
 }
 
 .animate-neon-left {
-  animation: neon-left 2s infinite;
+  animation: neon-left 2s infinite 1.5s;
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(8px);
 }
