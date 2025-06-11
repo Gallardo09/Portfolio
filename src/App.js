@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-// Componente OrbitSystem integrado
-const OrbitSystem = () => {
+// Componente OrbitSystem optimizado
+const OrbitSystem = React.memo(() => {
   const skillGroups = [
     // Órbita 1 - Frontend
     {
@@ -48,30 +48,25 @@ const OrbitSystem = () => {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="relative w-96 h-96 lg:w-[500px] lg:h-[500px] flex justify-center items-center">
-        {/* Imagen central con efectos de levitación y neón */}
-        <div className="absolute z-20 w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-1 shadow-2xl animate-float">
-          {/* Anillo neón exterior */}
-          <div className="absolute inset-0 rounded-full border-2 border-blue-400 animate-neon-pulse" style={{
-            boxShadow: '0 0 20px #3B82F6, 0 0 40px #3B82F6, 0 0 60px #3B82F6'
-          }}></div>
+      <div className="relative w-96 h-96 lg:w-[500px] lg:h-[500px] flex justify-center items-center orbit-system-container">
+        {/* Imagen central optimizada */}
+        <div className="absolute z-20 w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-1 shadow-lg animate-float">
+          <div className="absolute inset-0 rounded-full border-2 border-blue-400/50"></div>
           
-          {/* Contenedor de la imagen */}
-          <div className="w-full h-full rounded-full overflow-hidden border-4 border-blue-300/50 backdrop-blur-sm relative">
+          <div className="w-full h-full rounded-full overflow-hidden border-4 border-blue-300/50 relative">
             <img 
               src="/pictures/perfil.webp" 
               alt="Darbin Gallardo" 
               className="w-full h-full object-cover"
+              loading="lazy"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.parentElement.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg">DG</div>';
               }}
             />
-            {/* Overlay con efecto de brillo */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 to-transparent animate-shine"></div>
           </div>
           
-          {/* Partículas orbitales alrededor del centro */}
+          {/* Partículas orbitales reducidas */}
           <div className="absolute inset-0 animate-particle-orbit">
             {[...Array(3)].map((_, i) => (
               <div
@@ -88,19 +83,17 @@ const OrbitSystem = () => {
           </div>
         </div>
 
-        {/* Órbitas con rotación tipo neutrón */}
+        {/* Órbitas optimizadas */}
         {skillGroups.map((group, groupIndex) => (
           <div key={groupIndex} className="absolute inset-0 flex justify-center items-center">
-            {/* Línea de órbita sutil */}
             <div 
-              className="absolute border border-blue-300/20 rounded-full animate-orbit-glow"
+              className="absolute border border-blue-300/10 rounded-full"
               style={{
                 width: `${group.radius * 2}px`,
                 height: `${group.radius * 2}px`,
               }}
             ></div>
             
-            {/* Contenedor de iconos con rotación neutrón */}
             <div 
               className="absolute animate-neutron-spin"
               style={{
@@ -108,7 +101,6 @@ const OrbitSystem = () => {
                 height: `${group.radius * 2}px`,
                 animationDuration: `${group.duration}s`,
                 animationDirection: group.direction === 1 ? 'normal' : 'reverse',
-                transformOrigin: 'center center'
               }}
             >
               {group.skills.map((skill, index) => {
@@ -121,32 +113,20 @@ const OrbitSystem = () => {
                       transform: `rotate(${angle}deg) translateX(${group.radius}px)`,
                     }}
                   >
-                    {/* Contenedor del icono con efecto neon y rotación inversa para mantener orientación */}
                     <div 
-                      className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-125 group cursor-pointer animate-counter-rotate"
+                      className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center border border-white/10 transition-all duration-300 hover:scale-110 group cursor-pointer animate-counter-rotate"
                       style={{
                         background: `rgba(${parseInt(skill.color.slice(1,3), 16)}, ${parseInt(skill.color.slice(3,5), 16)}, ${parseInt(skill.color.slice(5,7), 16)}, 0.1)`,
-                        boxShadow: `0 0 15px ${skill.color}40, inset 0 0 15px ${skill.color}20`,
                         animationDuration: `${group.duration}s`,
                         animationDirection: group.direction === 1 ? 'reverse' : 'normal'
                       }}
                     >
-                      {/* Efecto neon exterior */}
-                      <div 
-                        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"
-                        style={{
-                          boxShadow: `0 0 25px ${skill.color}80, 0 0 35px ${skill.color}60`
-                        }}
-                      ></div>
-                      
-                      {/* Icono */}
                       <i 
-                        className={`${skill.icon} text-base lg:text-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-12`}
+                        className={`${skill.icon} text-base lg:text-lg`}
                         style={{ color: skill.color }}
                         title={skill.name}
                       ></i>
                       
-                      {/* Tooltip */}
                       <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-30">
                         {skill.name}
                       </div>
@@ -158,13 +138,12 @@ const OrbitSystem = () => {
           </div>
         ))}
 
-        {/* Efectos de fondo adicionales */}
+        {/* Efectos de fondo optimizados */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Partículas flotantes con movimiento más dinámico */}
-          {[...Array(15)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-blue-400/60 rounded-full animate-float-particle"
+              className="absolute w-1 h-1 bg-blue-400/40 rounded-full animate-float-particle"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -173,16 +152,9 @@ const OrbitSystem = () => {
               }}
             ></div>
           ))}
-          
-          {/* Ondas de energía */}
-          <div className="absolute inset-0 flex justify-center items-center">
-            <div className="w-64 h-64 lg:w-80 lg:h-80 border border-blue-400/10 rounded-full animate-energy-wave"></div>
-            <div className="absolute w-48 h-48 lg:w-60 lg:h-60 border border-blue-400/15 rounded-full animate-energy-wave-reverse"></div>
-          </div>
         </div>
 
-        {/* Glow central mejorado */}
-        <div className="absolute w-56 h-56 lg:w-64 lg:h-64 bg-gradient-radial from-blue-400/20 via-blue-500/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute w-56 h-56 lg:w-64 lg:h-64 bg-gradient-radial from-blue-400/10 to-transparent rounded-full blur-xl"></div>
       </div>
 
       <style jsx>{`
@@ -191,170 +163,72 @@ const OrbitSystem = () => {
         }
         
         @keyframes float {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(-10px) scale(1.02); }
-        }
-        
-        @keyframes neon-pulse {
-          0%, 100% { 
-            box-shadow: 0 0 20px #3B82F6, 0 0 40px #3B82F6, 0 0 60px #3B82F6;
-            border-color: #3B82F6;
-          }
-          50% { 
-            box-shadow: 0 0 30px #60A5FA, 0 0 60px #60A5FA, 0 0 90px #60A5FA;
-            border-color: #60A5FA;
-          }
-        }
-        
-        @keyframes shine {
-          0% { opacity: 0.3; transform: rotate(0deg); }
-          50% { opacity: 0.6; }
-          100% { opacity: 0.3; transform: rotate(360deg); }
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
         }
         
         @keyframes particle-orbit {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         
         @keyframes neutron-spin {
-          0% { 
-            transform: rotate(0deg) rotateX(0deg) rotateY(0deg);
-          }
-          25% { 
-            transform: rotate(90deg) rotateX(15deg) rotateY(15deg);
-          }
-          50% { 
-            transform: rotate(180deg) rotateX(0deg) rotateY(30deg);
-          }
-          75% { 
-            transform: rotate(270deg) rotateX(-15deg) rotateY(15deg);
-          }
-          100% { 
-            transform: rotate(360deg) rotateX(0deg) rotateY(0deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         
         @keyframes counter-rotate {
-          0% { 
-            transform: rotate(0deg) rotateX(0deg) rotateY(0deg);
-          }
-          25% { 
-            transform: rotate(-90deg) rotateX(-15deg) rotateY(-15deg);
-          }
-          50% { 
-            transform: rotate(-180deg) rotateX(0deg) rotateY(-30deg);
-          }
-          75% { 
-            transform: rotate(-270deg) rotateX(15deg) rotateY(-15deg);
-          }
-          100% { 
-            transform: rotate(-360deg) rotateX(0deg) rotateY(0deg);
-          }
-        }
-        
-        @keyframes orbit-glow {
-          0%, 100% { 
-            border-color: rgba(59, 130, 246, 0.2);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
-          }
-          50% { 
-            border-color: rgba(96, 165, 250, 0.4);
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
         
         @keyframes float-particle {
-          0%, 100% { 
-            transform: translateY(0px) translateX(0px) scale(1);
-            opacity: 0.6;
-          }
-          33% { 
-            transform: translateY(-20px) translateX(10px) scale(1.2);
-            opacity: 1;
-          }
-          66% { 
-            transform: translateY(10px) translateX(-15px) scale(0.8);
-            opacity: 0.8;
-          }
-        }
-        
-        @keyframes energy-wave {
-          0% { 
-            transform: scale(1);
-            opacity: 0.3;
-          }
-          50% { 
-            transform: scale(1.1);
-            opacity: 0.1;
-          }
-          100% { 
-            transform: scale(1.2);
-            opacity: 0;
-          }
-        }
-        
-        @keyframes energy-wave-reverse {
-          0% { 
-            transform: scale(1.2);
-            opacity: 0;
-          }
-          50% { 
-            transform: scale(1.1);
-            opacity: 0.1;
-          }
-          100% { 
-            transform: scale(1);
-            opacity: 0.3;
-          }
+          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.6; }
+          50% { transform: translateY(-15px) translateX(5px); opacity: 1; }
         }
         
         .animate-float {
           animation: float 4s ease-in-out infinite;
-        }
-        
-        .animate-neon-pulse {
-          animation: neon-pulse 2s ease-in-out infinite;
-        }
-        
-        .animate-shine {
-          animation: shine 3s linear infinite;
+          will-change: transform;
         }
         
         .animate-particle-orbit {
           animation: particle-orbit 8s linear infinite;
+          will-change: transform;
         }
         
         .animate-neutron-spin {
           animation: neutron-spin var(--duration, 30s) linear infinite;
+          will-change: transform;
         }
         
         .animate-counter-rotate {
           animation: counter-rotate var(--duration, 30s) linear infinite;
-        }
-        
-        .animate-orbit-glow {
-          animation: orbit-glow 3s ease-in-out infinite;
+          will-change: transform;
         }
         
         .animate-float-particle {
           animation: float-particle var(--duration, 4s) ease-in-out infinite;
+          will-change: transform, opacity;
         }
         
-        .animate-energy-wave {
-          animation: energy-wave 4s ease-out infinite;
-        }
-        
-        .animate-energy-wave-reverse {
-          animation: energy-wave-reverse 4s ease-out infinite;
+        @media (prefers-reduced-motion: reduce) {
+          .animate-float,
+          .animate-particle-orbit,
+          .animate-neutron-spin,
+          .animate-counter-rotate,
+          .animate-float-particle {
+            animation: none !important;
+          }
         }
       `}</style>
     </div>
   );
-};
+});
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
+  const heroRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -370,13 +244,30 @@ const Portfolio = () => {
       }
     };
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          // Puedes agregar lógica para pausar/activar animaciones aquí si es necesario
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white">
-      {/* Font Awesome */}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
       {/* Navigation */}
@@ -412,11 +303,14 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-10 lg:pt-18">
-        {/* Fondo animado */}
+      <section 
+        id="hero" 
+        ref={heroRef}
+        className="min-h-screen flex items-center justify-center relative overflow-hidden pt-10 lg:pt-18"
+      >
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-xl"></div>
         </div>
         
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/50"></div>
@@ -424,8 +318,8 @@ const Portfolio = () => {
         <div className="container mx-auto px-4 sm:px-6 z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
             
-            {/* Contenido de texto - Lado izquierdo */}
-            <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
+            {/* Contenido de texto */}
+            <div className="mt-4 flex-1 text-center lg:text-left order-2 lg:order-1">
               <p className="text-base sm:text-lg text-blue-300 mb-2">Hola Mundo, Soy Darbin</p>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-blue-200 to-green-200 bg-clip-text text-transparent leading-tight">
                 Licenciado en Informática Administrativa
@@ -442,13 +336,13 @@ const Portfolio = () => {
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
                 <a 
                   href="#contact" 
-                  className="px-6 lg:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                  className="px-6 lg:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                 >
                   Descargar CV
                 </a>
                 <a 
                   href="#projects" 
-                  className="px-6 lg:px-8 py-3 border-2 border-blue-400 hover:bg-blue-900/30 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/25"
+                  className="px-6 lg:px-8 py-3 border-2 border-blue-400 hover:bg-blue-900/30 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                 >
                   Contáctame
                 </a>
@@ -465,13 +359,10 @@ const Portfolio = () => {
                 <a href="#" className="text-2xl text-gray-400 hover:text-green-400 transition-colors duration-300">
                   <i className="fab fa-whatsapp"></i>
                 </a>
-                <a href="#" className="text-2xl text-gray-400 hover:text-purple-400 transition-colors duration-300">
-                  <i className="fab fa-tiktok"></i>
-                </a>
               </div>
             </div>
             
-            {/* Sistema orbital - Lado derecho */}
+            {/* Sistema orbital */}
             <div className="flex-1 flex justify-center lg:justify-end order-1 lg:order-2">
               <OrbitSystem />
             </div>
@@ -517,4 +408,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default React.memo(Portfolio);
