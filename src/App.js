@@ -278,7 +278,7 @@ const Portfolio = () => {
     {
       id: 1,
       title: "Mi Educación",
-      content: "Licenciado en Informática Administrativa con especialización en desarrollo web y bases de datos.",
+      content: "Licenciado en Informática Administrativa de la UNAH con especialización en desarrollo web y bases de datos.",
       color: "blue"
     },
     {
@@ -403,6 +403,7 @@ const Portfolio = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (heroRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(heroRef.current);
       }
     };
