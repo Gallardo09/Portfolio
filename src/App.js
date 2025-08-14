@@ -39,7 +39,7 @@ const NeonCard = ({ children, title, isSelected = false, onClick, color = "blue"
       {isSelected && (
         <div className={`absolute inset-0 rounded-lg border-2 border-white/30 pointer-events-none animate-pulse`}></div>
       )}
-      <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
+      <h3 className="text-xl font-bold mb-6 text-white">{title}</h3>
       <div className="text-gray-300">{children}</div>
     </div>
   );
@@ -295,52 +295,238 @@ const Portfolio = () => {
     }
   ];
 
-  const skills = [
-    {
-      id: 1,
-      title: "Frontend",
-      content: "React, Angular, JavaScript, TypeScript, HTML5, CSS3, Tailwind, Bootstrap",
-      color: "blue",
-      details: {
-        experience: "4+ años",
-        projects: "10+ proyectos",
-        level: "Avanzado"
-      }
-    },
-    {
-      id: 2,
-      title: "Backend",
-      content: ".NET Core, C#, Node.js, Express, REST APIs, GraphQL",
-      color: "purple",
-      details: {
-        experience: "5+ años",
-        projects: "15+ proyectos",
-        level: "Experto"
-      }
-    },
-    {
-      id: 3,
-      title: "Bases de Datos",
-      content: "SQL Server, MySQL, PostgreSQL, MongoDB, Entity Framework",
-      color: "green",
-      details: {
-        experience: "5+ años",
-        projects: "20+ proyectos",
-        level: "Experto"
-      }
-    },
-    {
-      id: 4,
-      title: "DevOps & Tools",
-      content: "Git, GitHub, Azure DevOps, Docker, IIS, VS Code",
-      color: "pink",
-      details: {
-        experience: "3+ años",
-        projects: "10+ proyectos",
-        level: "Intermedio-Avanzado"
-      }
-    }
-  ];
+const skills = [
+  {
+    id: 1,
+    title: "Frontend Development",
+    content: (
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { icon: "fab fa-react", name: "React", color: "#61DAFB" },
+          { icon: "fab fa-angular", name: "Angular", color: "#DD0031" },
+          { icon: "fab fa-js", name: "JavaScript", color: "#F7DF1E" },
+          { icon: "fab fa-html5", name: "HTML5", color: "#E34F26" },
+          { icon: "fab fa-css3-alt", name: "CSS3", color: "#1572B6" },
+          { icon: "fab fa-bootstrap", name: "Bootstrap", color: "#7952B3" },
+          { icon: "fas fa-wind", name: "Tailwind", color: "#06B6D4" },
+          { icon: "fab fa-microsoft", name: "TypeScript", color: "#3178C6" }
+        ].map((tech, index) => (
+          <div key={index} className="flex flex-col items-center group cursor-pointer">
+            <div className="relative mb-3 p-4 rounded-2xl bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:shadow-xl">
+              <i 
+                className={`${tech.icon} text-3xl text-gray-400 transition-all duration-500 group-hover:scale-125 group-hover:drop-shadow-lg`}
+                style={{
+                  filter: 'grayscale(100%)',
+                  '--hover-color': tech.color
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = tech.color;
+                  e.target.style.filter = 'grayscale(0%)';
+                  e.target.style.textShadow = `0 0 20px ${tech.color}80`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = '';
+                  e.target.style.filter = 'grayscale(100%)';
+                  e.target.style.textShadow = '';
+                }}
+              ></i>
+              
+              {/* Efecto de brillo al hover */}
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-md"
+                style={{ backgroundColor: tech.color }}
+              ></div>
+            </div>
+            
+            <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-all duration-300 group-hover:scale-105">
+              {tech.name}
+            </span>
+            
+            {/* Línea decorativa */}
+            <div 
+              className="h-0.5 w-0 bg-gradient-to-r transition-all duration-500 group-hover:w-full mt-2 rounded-full"
+              style={{ 
+                backgroundImage: `linear-gradient(90deg, transparent, ${tech.color}, transparent)`
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+    ),
+    color: "blue"
+  },
+  {
+    id: 2,
+    title: "Backend Development",
+    content: (
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { icon: "fas fa-code", name: ".NET Core", color: "#512BD4" },
+          { icon: "fas fa-hashtag", name: "C#", color: "#239120" },
+          { icon: "fab fa-node-js", name: "Node.js", color: "#68A063" },
+          { icon: "fas fa-file-code", name: "C", color: "#A8B9CC" },
+          { icon: "fas fa-file-code", name: "C++", color: "#00599C" },
+          { icon: "fas fa-code-branch", name: "GraphQL", color: "#E10098" },
+          { icon: "fas fa-server", name: "REST API", color: "#FF6B6B" },
+          { icon: "fas fa-cloud", name: "Azure", color: "#0089D6" }
+        ].map((tech, index) => (
+          <div key={index} className="flex flex-col items-center group cursor-pointer">
+            <div className="relative mb-3 p-4 rounded-2xl bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:shadow-xl">
+              <i 
+                className={`${tech.icon} text-3xl text-gray-400 transition-all duration-500 group-hover:scale-125 group-hover:drop-shadow-lg`}
+                style={{
+                  filter: 'grayscale(100%)',
+                  '--hover-color': tech.color
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = tech.color;
+                  e.target.style.filter = 'grayscale(0%)';
+                  e.target.style.textShadow = `0 0 20px ${tech.color}80`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = '';
+                  e.target.style.filter = 'grayscale(100%)';
+                  e.target.style.textShadow = '';
+                }}
+              ></i>
+              
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-md"
+                style={{ backgroundColor: tech.color }}
+              ></div>
+            </div>
+            
+            <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-all duration-300 group-hover:scale-105">
+              {tech.name}
+            </span>
+            
+            <div 
+              className="h-0.5 w-0 bg-gradient-to-r transition-all duration-500 group-hover:w-full mt-2 rounded-full"
+              style={{ 
+                backgroundImage: `linear-gradient(90deg, transparent, ${tech.color}, transparent)`
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+    ),
+    color: "purple"
+  },
+  {
+    id: 3,
+    title: "Database Management",
+    content: (
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { icon: "fas fa-database", name: "SQL Server", color: "#CC2927" },
+          { icon: "fas fa-database", name: "MySQL", color: "#4479A1" },
+          { icon: "fas fa-database", name: "PostgreSQL", color: "#336791" },
+          { icon: "fas fa-table", name: "SQLite", color: "#003B57" },
+          { icon: "fas fa-project-diagram", name: "Entity Framework", color: "#EA4EAA" },
+          { icon: "fas fa-database", name: "Oracle", color: "#F80000" },
+          { icon: "fas fa-database", name: "Firebird", color: "#FF7D00" },
+          { icon: "fas fa-database", name: "Access", color: "#A4373A" }
+        ].map((tech, index) => (
+          <div key={index} className="flex flex-col items-center group cursor-pointer">
+            <div className="relative mb-3 p-4 rounded-2xl bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:shadow-xl">
+              <i 
+                className={`${tech.icon} text-3xl text-gray-400 transition-all duration-500 group-hover:scale-125 group-hover:drop-shadow-lg`}
+                style={{
+                  filter: 'grayscale(100%)',
+                  '--hover-color': tech.color
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = tech.color;
+                  e.target.style.filter = 'grayscale(0%)';
+                  e.target.style.textShadow = `0 0 20px ${tech.color}80`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = '';
+                  e.target.style.filter = 'grayscale(100%)';
+                  e.target.style.textShadow = '';
+                }}
+              ></i>
+              
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-md"
+                style={{ backgroundColor: tech.color }}
+              ></div>
+            </div>
+            
+            <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-all duration-300 group-hover:scale-105">
+              {tech.name}
+            </span>
+            
+            <div 
+              className="h-0.5 w-0 bg-gradient-to-r transition-all duration-500 group-hover:w-full mt-2 rounded-full"
+              style={{ 
+                backgroundImage: `linear-gradient(90deg, transparent, ${tech.color}, transparent)`
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+    ),
+    color: "green"
+  },
+  {
+    id: 4,
+    title: "DevOps & Tools",
+    content: (
+      <div className="grid grid-cols-4 gap-6">
+        {[
+          { icon: "fab fa-git-alt", name: "Git", color: "#F05032" },
+          { icon: "fab fa-github", name: "GitHub", color: "#181717" },
+          { icon: "fab fa-microsoft", name: "Azure", color: "#0078D4" },
+          { icon: "fas fa-server", name: "IIS", color: "#005A9F" },
+          { icon: "fas fa-code", name: "VS Code", color: "#007ACC" },
+          { icon: "fab fa-ubuntu", name: "Linux", color: "#E95420" },
+          { icon: "fas fa-terminal", name: "Bash", color: "#4EAA25" },
+          { icon: "fas fa-cloud", name: "Azure DevOps", color: "#0078D7" }
+        ].map((tech, index) => (
+          <div key={index} className="flex flex-col items-center group cursor-pointer">
+            <div className="relative mb-3 p-4 rounded-2xl bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:shadow-xl">
+              <i 
+                className={`${tech.icon} text-3xl text-gray-400 transition-all duration-500 group-hover:scale-125 group-hover:drop-shadow-lg`}
+                style={{
+                  filter: 'grayscale(100%)',
+                  '--hover-color': tech.color
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = tech.color;
+                  e.target.style.filter = 'grayscale(0%)';
+                  e.target.style.textShadow = `0 0 20px ${tech.color}80`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = '';
+                  e.target.style.filter = 'grayscale(100%)';
+                  e.target.style.textShadow = '';
+                }}
+              ></i>
+              
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-md"
+                style={{ backgroundColor: tech.color }}
+              ></div>
+            </div>
+            
+            <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-all duration-300 group-hover:scale-105">
+              {tech.name}
+            </span>
+            
+            <div 
+              className="h-0.5 w-0 bg-gradient-to-r transition-all duration-500 group-hover:w-full mt-2 rounded-full"
+              style={{ 
+                backgroundImage: `linear-gradient(90deg, transparent, ${tech.color}, transparent)`
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+    ),
+    color: "pink"
+  }
+];
 
   const projects = [
     {
@@ -354,7 +540,7 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      title: "E-commerce",
+      title: "E-commerce Platform",
       content: "Plataforma de comercio electrónico con pasarela de pagos y panel administrativo.",
       color: "purple",
       technologies: ["Angular", "Node.js", "MongoDB"],
@@ -363,7 +549,7 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      title: "App de Tareas",
+      title: "Task Management App",
       content: "Aplicación web para gestión de tareas con calendario integrado y recordatorios.",
       color: "green",
       technologies: ["React", "Firebase"],
@@ -552,7 +738,7 @@ const Portfolio = () => {
             </span>
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {skills.map((skill) => (
               <NeonCard
                 key={skill.id}
@@ -560,24 +746,11 @@ const Portfolio = () => {
                 color={skill.color}
                 isSelected={selectedSkill === skill.id}
                 onClick={() => setSelectedSkill(selectedSkill === skill.id ? null : skill.id)}
+                className="min-h-[400px]"
               >
-                <p className="text-gray-300 mb-3">{skill.content}</p>
-                {selectedSkill === skill.id && (
-                  <div className="mt-3 pt-3 border-t border-white/10 space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-300">Experiencia:</span>
-                      <span>{skill.details.experience}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-300">Proyectos:</span>
-                      <span>{skill.details.projects}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-300">Nivel:</span>
-                      <span>{skill.details.level}</span>
-                    </div>
-                  </div>
-                )}
+                <div className="mt-4">
+                  {skill.content}
+                </div>
               </NeonCard>
             ))}
           </div>
