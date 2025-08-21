@@ -5,7 +5,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 // Componente Card con efecto neón
 const NeonCard = ({ children, title, isSelected = false, onClick, color = "blue", className = "" }) => {
-  const colorClasses = {
+const colorClasses = {
     blue: {
       border: "border-blue-400 hover:border-blue-300",
       shadow: "shadow-blue-500/20",
@@ -25,6 +25,11 @@ const NeonCard = ({ children, title, isSelected = false, onClick, color = "blue"
       border: "border-pink-400 hover:border-pink-300",
       shadow: "shadow-pink-500/20",
       glow: "shadow-[0_0_15px_rgba(236,72,153,0.5)]"
+    },
+    coffee: {
+      border: "border-amber-600 hover:border-amber-500",
+      shadow: "shadow-amber-700/20",
+      glow: "shadow-[0_0_15px_rgba(120,53,15,0.5)]"
     }
   };
 
@@ -587,6 +592,34 @@ const skills = [
         "Sistema de valoraciones",
         "Panel administrativo"
       ]
+    },
+    {
+      id: 5,
+      title: "SysCafe PRO",
+      content: "Sistema especializado para la gestión integral del café, abarcando desde el pesaje en básculas y control de transportistas, hasta el inventario detallado por planta, exportaciones y gestión de precios, optimizando la operación de una empresa importadora y exportadora.",
+      color: "coffee",
+      technologies: [
+        "ASP.NET MVC", 
+        "JavaScript", 
+        "jQuery", 
+        "SQL Server", 
+        "Azure DevOps", 
+        "Git", 
+        "Boostrap", 
+        "Crystal Reports"
+      ],
+      year: "2024",
+      github: null,
+      features: [
+        "Gestión eficiente de relaciones con proveedores y clientes",
+        "Sistema de valoraciones y retroalimentación de transacciones",
+        "Panel administrativo con reportes personalizados",
+        "Registro y control de pesaje de café en básculas y contenedores",
+        "Gestión de información de transportistas y camiones",
+        "Inventario detallado de café por planta y por tipo de defecto",
+        "Control de exportaciones de café hacia distintos países",
+        "Gestión dinámica de precios y costos asociados"
+      ]
     }
   ];
 
@@ -799,7 +832,7 @@ const skills = [
           </span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {projects.map((project) => (
             <NeonCard
               key={project.id}
