@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 // Componente Card con efecto neón
 const NeonCard = ({ children, title, isSelected = false, onClick, color = "blue", className = "" }) => {
@@ -531,30 +534,59 @@ const skills = [
   const projects = [
     {
       id: 1,
-      title: "Sistema de Gestión ERP",
-      content: "Sistema completo para gestión empresarial con módulos de inventario, facturación y RRHH.",
+      title: "Sistema IMAVA - Matrícula Automatizada",
+      content: "Sistema completo de gestión académica para el Instituto María Auxiliadora.",
       color: "blue",
-      technologies: ["React", ".NET Core", "SQL Server"],
+      technologies: ["Windows Forms", "C#", "SQL Server", "Reporting Services"],
       year: "2023",
-      link: "#"
+      github: null,
+      features: [
+        "Matrícula automatizada",
+        "Gestión de calificaciones",
+        "Reportes institucionales"
+      ]
     },
     {
       id: 2,
-      title: "E-commerce Platform",
-      content: "Plataforma de comercio electrónico con pasarela de pagos y panel administrativo.",
+      title: "SYSNARA - Sistema Escolar",
+      content: "Plataforma web de administración escolar para el Colegio Nuestra Señora del Rosario.",
       color: "purple",
-      technologies: ["Angular", "Node.js", "MongoDB"],
-      year: "2022",
-      link: "#"
+      technologies: [".NET Core 8", "SQL Server", "Bootstrap", "JavaScript"],
+      year: "2024",
+      github: null,
+      features: [
+        "Módulos académicos",
+        "Integración FastReport",
+        "UI moderna"
+      ]
     },
     {
       id: 3,
-      title: "Task Management App",
-      content: "Aplicación web para gestión de tareas con calendario integrado y recordatorios.",
+      title: "Xime Estética & Spa",
+      content: "Página web corporativa para centro de estética con diseño responsive.",
+      color: "pink",
+      technologies: ["React", "TailwindCSS", "PostgreSQL"],
+      year: "2023",
+      github: "https://github.com/tu-usuario/xime-estetica",
+      features: [
+        "Presentación de servicios",
+        "Diseño responsive",
+        "Gestión de contenidos"
+      ]
+    },
+    {
+      id: 4,
+      title: "Servicios Express HN",
+      content: "Plataforma para promoción de servicios profesionales.",
       color: "green",
-      technologies: ["React", "Firebase"],
-      year: "2021",
-      link: "#"
+      technologies: ["React", ".NET Core", "SQL Server", "Azure"],
+      year: "2024",
+      github: null,
+      features: [
+        "Conexión proveedores-clientes",
+        "Sistema de valoraciones",
+        "Panel administrativo"
+      ]
     }
   ];
 
@@ -663,14 +695,15 @@ const skills = [
               
               {/* Botones */}
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
+              <a 
+                href="/documents/CV_Darbin_José_Gallardo_Quintero_2025.pdf" 
+                download="CV_Darbin_Gallardo.pdf"
+                className="px-6 lg:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+              >
+                Descargar CV
+              </a>
                 <a 
                   href="#contact" 
-                  className="px-6 lg:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
-                >
-                  Descargar CV
-                </a>
-                <a 
-                  href="#projects" 
                   className="px-6 lg:px-8 py-3 border-2 border-blue-400 hover:bg-blue-900/30 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-400/25"
                 >
                   Contáctame
@@ -685,7 +718,7 @@ const skills = [
                 <a href="https://github.com/Gallardo09" className="text-2xl text-gray-400 hover:text-blue-400 transition-colors duration-300">
                   <i className="fab fa-github"></i>
                 </a>
-                <a href="https://wa.me/50497824537?text=Hola%2C%20estoy%20interesado%20en%20tus%20servicios" className="text-2xl text-gray-400 hover:text-green-400 transition-colors duration-300">
+                <a href="https://wa.me/50496546889?text=Hola%2C%20estoy%20interesado%20en%20tus%20servicios" className="text-2xl text-gray-400 hover:text-green-400 transition-colors duration-300">
                   <i className="fab fa-whatsapp"></i>
                 </a>
               </div>
@@ -757,50 +790,102 @@ const skills = [
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center justify-center bg-slate-800/50 py-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
-            <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
-              Mis Proyectos
-            </span>
-          </h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {projects.map((project) => (
-              <NeonCard
-                key={project.id}
-                title={project.title}
-                color={project.color}
-                isSelected={selectedProject === project.id}
-                onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
-              >
-                <p className="text-gray-300">{project.content}</p>
+    {/* Projects Section */}
+    <section id="projects" className="min-h-screen flex items-center justify-center bg-slate-800/50 py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+            Proyectos Destacados
+          </span>
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {projects.map((project) => (
+            <NeonCard
+              key={project.id}
+              title={project.title}
+              color={project.color}
+              isSelected={selectedProject === project.id}
+              onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
+              className="h-full flex flex-col"
+            >
+              <div className="flex-grow">
+                <p className="text-gray-300 mb-3 text-sm">{project.content}</p>
+                
                 {selectedProject === project.id && (
-                  <div className="mt-4 pt-4 border-t border-white/10 space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-300">Tecnologías:</span>
-                      <span className="text-right">{project.technologies.join(", ")}</span>
+                  <div className="mt-2 pt-2 border-t border-white/10 space-y-2">
+                    <div>
+                      <h4 className="text-blue-300 text-xs font-medium mb-1">Tecnologías:</h4>
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {project.technologies.map((tech, idx) => (
+                          <span key={idx} className="px-2 py-0.5 bg-slate-700/50 rounded text-xs">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    
+                    <div className="flex justify-between text-xs">
                       <span className="text-blue-300">Año:</span>
                       <span>{project.year}</span>
                     </div>
-                    <a 
-                      href={project.link} 
-                      className="block mt-4 px-4 py-2 bg-blue-600/50 hover:bg-blue-600 rounded-lg text-center text-sm transition-colors duration-300"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Ver Detalles
-                    </a>
+                    
+                    <div>
+                      <h4 className="text-blue-300 text-xs font-medium mb-1">Características:</h4>
+                      <ul className="list-disc list-inside text-xs space-y-0.5">
+                        {project.features.map((feature, idx) => (
+                          <li key={idx}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 )}
-              </NeonCard>
-            ))}
-          </div>
+              </div>
+
+              <div className="mt-auto pt-3 flex justify-between gap-2">
+                {project.github ? (
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex-1 px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-xs text-center transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <i className="fab fa-github mr-1"></i> Código
+                  </a>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      Swal.fire({
+                        title: 'Disponibilidad del Código',
+                        html: `Por políticas de la empresa cliente, <strong>${project.title}</strong> fue desarrollado localmente en sus instalaciones y no está disponible en repositorios públicos.`,
+                        icon: 'info',
+                        confirmButtonText: 'Entendido',
+                        background: '#1e293b',
+                        color: '#f8fafc',
+                        confirmButtonColor: '#3b82f6'
+                      });
+                    }}
+                    className="flex-1 px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-xs text-center transition-colors"
+                  >
+                    <i className="fas fa-lock mr-1"></i> Código
+                  </button>
+                )}
+                
+                <button 
+                  className="flex-1 px-3 py-1.5 bg-blue-600/50 hover:bg-blue-600 rounded text-xs text-center transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <i className="fas fa-external-link-alt mr-1"></i> Demo
+                </button>
+              </div>
+            </NeonCard>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
+
 
       {/* Contact Section */}
       <section id="contact" className="min-h-screen flex items-center justify-center py-20">
