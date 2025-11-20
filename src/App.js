@@ -540,7 +540,7 @@ const skills = [
     {
       id: 1,
       title: "Sistema IMAVA - Matrícula Automatizada",
-      content: "Sistema completo de gestión académica para el Instituto María Auxiliadora.",
+      content: "Sistema completo de gestión académica para el Instituto Manantial de Valores.",
       color: "blue",
       technologies: ["Windows Forms", "C#", "SQL Server", "Reporting Services"],
       year: "2023",
@@ -554,7 +554,7 @@ const skills = [
     {
       id: 2,
       title: "SYSNARA - Sistema Escolar",
-      content: "Plataforma web de administración escolar para el Colegio Nuestra Señora del Rosario.",
+      content: "Plataforma web de administración escolar para el Instituto Jóvenes Grandiosos.",
       color: "purple",
       technologies: [".NET Core 8", "SQL Server", "Bootstrap", "JavaScript"],
       year: "2024",
